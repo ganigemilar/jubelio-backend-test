@@ -1,0 +1,23 @@
+{
+  "name": "jubelio-backend-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ganigemilar/jubelio-backend-test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ganigemilar/jubelio-backend-test/issues"
+  },
+  "homepage": "https://github.com/ganigemilar/jubelio-backend-test#readme",
+  "dependencies": {
+    "@hapi/hapi": "^20.2.1",
+    "pg": "^8.7.1"
+  }
+}
