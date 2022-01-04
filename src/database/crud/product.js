@@ -1,6 +1,8 @@
+const { rows } = require('pg/lib/defaults')
 const { pool } = require('../db')
-const initdb = require('../init-db')
 
+const initdb = require('../init-db')
+const camelCase = require('camelcase')
 
 
 async function create(product) {
@@ -87,21 +89,41 @@ async function deleteById(id) {
     }
 }
 
+async function getList(offset, limit) {
+    if (!offset || offset < 0) {
+        console.warn('offset cannot be null and less than 0')
+
+    }
+
+    if (!limit || limit < 0) {
+        console.warn('limit cannot be null and less than 0')
+    }
+
+    try {
+        const res = await pool.query("SELECT * FROM tbl_product OFFSET $1 LIMIT $2", [offset, limit])
+
+        if (!res) return []
+        
+        const _res = []
+        for (let row of res.rows) {
+            let _prod = {}
+            for (const [key, val] of Object.entries(row)) {
+                _prod[`${camelCase(key)}`]= val
+            }
+            if (_prod) _res.push(_prod)
+        }
+
+        return _res
+    } catch (error) {
+        console.error(error)
+    }
+}
+
 module.exports = {
     create,
     getById,
     update,
-    deleteById
+    deleteById,
+    getList
 }
-
-// pool.query('DELETE FROM tbl_product')
-
-// let res = create({ 
-//     name: "APAPAA",
-//     sku: "sku2",
-//     image: "ini image",
-//     price: 178000
-// }).then(res => {
-//     console.log(JSON.stringify(res))
-// })
 

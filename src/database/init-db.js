@@ -1,7 +1,7 @@
 const { pool } = require('./db')
 
 async function createTables() {
-    let res = await pool.query(`
+    await pool.query(`
         CREATE TABLE IF NOT EXISTS tbl_product(
             id SERIAL PRIMARY KEY,
             name VARCHAR NOT NULL,
@@ -13,7 +13,18 @@ async function createTables() {
             CONSTRAINT sku_uniq UNIQUE (sku)
         )
     `)
-    console.log("create table tbl_product DONE!")
+    console.info("create table tbl_product DONE!")
+
+    await pool.query(`
+        CREATE TABLE IF NOT EXISTS tbl_auth(
+            id SERIAL PRIMARY KEY,
+            username VARCHAR,
+            api_key VARCHAR,
+
+            CONSTRAINT uniq1 UNIQUE (username, api_key)
+        )
+    `)
+    console.info("create table tbl_auth DONE!")
 }
 
 module.exports = {
