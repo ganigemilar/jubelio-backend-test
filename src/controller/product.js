@@ -13,15 +13,6 @@ const httpClient = axios.create({
 })
 const qs = require('qs')
 
-// const http = require('http')
-
-// server.route({
-//     method: 'GET',
-//     path: '/',
-//     handler: (request, reply) => {
-//         return 'HAI, GANI GEMILAR'
-//     }
-// })
 
 function parseXML(xml) {
     const parser = new XMLParser()
@@ -64,6 +55,9 @@ server.route({
 server.route({
     method: 'POST',
     path: '/product',
+    options: {
+        auth: 'simple'
+    },
     handler: async (request, reply) => {
         const payload = request.payload
 
@@ -83,6 +77,9 @@ server.route({
 server.route({
     method: 'GET',
     path: '/product/by-id/{id}',
+    options: {
+        auth: 'simple'
+    },
     handler: async (request, reply) => {
         const id = request.params.id
 
@@ -102,6 +99,9 @@ server.route({
 server.route({
     method: 'PUT',
     path: '/product',
+    options: {
+        auth: 'simple'
+    },
     handler: async (request, reply) => {
         const payload = request.payload
 
@@ -121,6 +121,9 @@ server.route({
 server.route({
     method: 'DELETE',
     path: '/product/by-id/{id}',
+    options: {
+        auth: 'simple'
+    },
     handler: async (request, reply) => {
         const id = request.params.id
 
@@ -140,6 +143,9 @@ server.route({
 server.route({
     method: 'GET',
     path: '/product/list',
+    options: {
+        auth: 'simple'
+    },
     handler: async (request, reply) => {
         const queries = request.query
 

@@ -21,7 +21,8 @@ async function createTables() {
             username VARCHAR,
             api_key VARCHAR,
 
-            CONSTRAINT uniq1 UNIQUE (username, api_key)
+            CONSTRAINT username_uniq UNIQUE (username),
+            CONSTRAINT api_key_uniq UNIQUE (api_key)
         )
     `)
     console.info("create table tbl_auth DONE!")

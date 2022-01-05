@@ -1,11 +1,16 @@
-const productController = require('./controller/product')
-
-const { init } = require('./server')
+const { start } = require('./server')
 const initdb = require('./database/init-db')
 const eleveniaApi = require('./api/elevenia-api')
 const productCrud = require('./database/crud/product')
 
-init()
+const startServer = async () => {
+    await start()
+
+    const productController = require('./controller/product')
+}
+startServer()
+
+
 initdb.createTables().then(async () => {
     const _fetchTasks = []
     const products = []

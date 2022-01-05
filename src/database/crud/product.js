@@ -1,7 +1,5 @@
-const { rows } = require('pg/lib/defaults')
 const { pool } = require('../db')
 
-const initdb = require('../init-db')
 const camelCase = require('camelcase')
 
 

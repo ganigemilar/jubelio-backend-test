@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/ganigemilar/jubelio-backend-test#readme",
   "dependencies": {
+    "@hapi/basic": "^6.0.0",
     "@hapi/hapi": "^20.2.1",
     "axios": "^0.24.0",
+    "bcrypt": "^5.0.1",
     "camelcase": "^6.3.0",
     "fast-xml-parser": "^4.0.0-beta.8",
     "pg": "^8.7.1",
