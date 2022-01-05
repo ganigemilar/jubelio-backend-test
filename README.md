@@ -10,7 +10,7 @@ npm start
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-## Basic Auth
+## Authentication
 For authentication, this service using **Basic Auth** for each request.
 Authentication base on "tbl_auth"
 
