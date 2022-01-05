@@ -136,3 +136,26 @@ server.route({
         }
     }
 })
+
+server.route({
+    method: 'GET',
+    path: '/product/list',
+    handler: async (request, reply) => {
+        const queries = request.query
+
+        if (!queries.page) return { result: "page cannot be null" }
+        
+        if (!queries.limit) return { result: "limit cannot be null"}
+
+        const page = queries.page
+        const limit = queries.limit
+        try {
+            const res = await productCrud.getList((page - 1) * limit, limit)
+            
+            return res
+        } catch (error) {
+            console.error(error)
+            return { result: "something wrong!" }
+        }
+    }
+})

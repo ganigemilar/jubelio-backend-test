@@ -60,13 +60,13 @@ async function update(product) {
 
     try {
         const res = await pool.query(
-            "UPDATE FROM tbl_product SET name = $2, sku = $3, image = $4, price = $5, description = $6 WHERE id = $1",
-            product.id, product.name, product.sku, product.image, product.price
+            "UPDATE tbl_product SET name = $2, sku = $3, image = $4, price = $5, description = $6 WHERE id = $1",
+            [product.id, product.name, product.sku, product.image, product.price, product.description]
         )
 
         if (!res) return null
 
-        return { ...res.rows[0] }
+        return true
     } catch (error) {
         console.error(error)
     }
@@ -79,7 +79,7 @@ async function deleteById(id) {
     }
 
     try {
-        const res = await pool.query("DELETE FROM tbl_product WHERE id = $1", id)
+        const res = await pool.query("DELETE FROM tbl_product WHERE id = $1", [id])
 
         if (!res) return null
 
@@ -90,17 +90,18 @@ async function deleteById(id) {
 }
 
 async function getList(offset, limit) {
-    if (!offset || offset < 0) {
+    if (!offset && offset < 0) {
         console.warn('offset cannot be null and less than 0')
 
     }
 
-    if (!limit || limit < 0) {
-        console.warn('limit cannot be null and less than 0')
+    if (!limit && limit <= 0) {
+        console.warn('limit cannot be null and less equal than 0')
+        return
     }
 
     try {
-        const res = await pool.query("SELECT * FROM tbl_product OFFSET $1 LIMIT $2", [offset, limit])
+        const res = await pool.query("SELECT * FROM tbl_product ORDER BY id DESC OFFSET $1 LIMIT $2", [offset, limit])
 
         if (!res) return []
         
